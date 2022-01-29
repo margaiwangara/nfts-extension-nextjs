@@ -28,7 +28,7 @@ const theme: DefaultTheme = {
     white: '#ffffff',
   },
   breakpoints: {
-    sm: '576px',
+    sm: '362px',
   },
 };
 

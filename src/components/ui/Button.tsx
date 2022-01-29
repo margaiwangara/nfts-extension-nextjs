@@ -39,7 +39,7 @@ export const Button = styled.button<ButtonTypes>`
   }};
   border: none;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 8.5px 10px 9.5px 10px;
   display: flex;
   align-items: center;
 `;
