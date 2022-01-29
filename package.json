@@ -7,7 +7,9 @@
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
-    "test": "jest --watchAll"
+    "lint": "next lint",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "repository": {
     "type": "git",
@@ -40,6 +42,9 @@
     "@types/node": "^17.0.13",
     "@types/react": "^17.0.38",
     "@types/styled-components": "^5.1.21",
+    "eslint": "^8.8.0",
+    "eslint-config-next": "^12.0.9",
+    "eslint-plugin-testing-library": "^5.0.4",
     "typescript": "^4.5.5"
   }
 }
