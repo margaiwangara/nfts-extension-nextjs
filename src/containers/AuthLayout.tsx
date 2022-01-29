@@ -1,4 +1,5 @@
 import { TopBar } from '@components/shared';
+import styled from 'styled-components';
 
 type Props = {
   children: React.ReactNode;
@@ -9,9 +10,15 @@ function AuthLayout({ children, title }: Props) {
   return (
     <section>
       <TopBar title={title} />
-      <section>{children}</section>
+      <AuthBodyWrapper>{children}</AuthBodyWrapper>
     </section>
   );
 }
+
+const AuthBodyWrapper = styled.section`
+  padding: 21px 28px;
+  display: flex;
+  flex-direction: column;
+`;
 
 export default AuthLayout;
