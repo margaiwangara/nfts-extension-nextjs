@@ -42,4 +42,5 @@ export const Button = styled.button<ButtonTypes>`
   padding: 8.5px 10px 9.5px 10px;
   display: flex;
   align-items: center;
+  line-height: 22px;
 `;
