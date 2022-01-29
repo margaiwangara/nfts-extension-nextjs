@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/margaiwangara/growth-lab-challenge#readme",
   "dependencies": {
+    "formik": "^2.2.9",
     "next": "^12.0.9",
     "next-redux-wrapper": "^7.0.5",
     "polished": "^4.1.4",
@@ -36,7 +37,8 @@
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.1",

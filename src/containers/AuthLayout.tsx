@@ -19,6 +19,8 @@ const AuthBodyWrapper = styled.section`
   padding: 21px 28px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow: hidden;
 `;
 
 export default AuthLayout;

@@ -1,117 +1,105 @@
 import AuthLayout from '@containers/AuthLayout';
 import styled from 'styled-components';
-import { Button } from '@components/ui';
+import { Button, Input, AuthBody } from '@components/ui';
 import Link from 'next/link';
+import { useState } from 'react';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import LoginWithNear from '@components/shared/LoginWithNear';
+
+const RegisterWithEmailSchema = Yup.object().shape({
+  email: Yup.string().required('Email is required'),
+});
+
+const RegisterWithPhoneSchema = Yup.object().shape({
+  phone: Yup.string().required('Phone number is required'),
+});
 
 function Register() {
+  const [activeTab, setActiveTab] = useState<'email' | 'phone'>('email');
   return (
     <AuthLayout>
-      <Body>
+      <AuthBody>
         <section className="start">
-          <NavPill>Email</NavPill>
-          <NavPill active>Phone</NavPill>
+          <NavPill
+            active={activeTab === 'email'}
+            onClick={() => setActiveTab('email')}
+          >
+            Email
+          </NavPill>
+          <NavPill
+            active={activeTab === 'phone'}
+            onClick={() => setActiveTab('phone')}
+          >
+            Phone
+          </NavPill>
         </section>
-        <section className="center">
-          <Input type="email" placeholder="johndoe@gmail.com" />
-        </section>
-        <section className="end">
-          <Button disabled>Continue</Button>
-          <p className="agreement">
-            by clicking continue you must agree to near labs{' '}
-            <Link href="#terms-and-conditions">
-              <a>Terms & Conditions</a>
-            </Link>{' '}
-            and{' '}
-            <Link href="#privacy-policy">
-              <a>Privacy Policy</a>
-            </Link>
-          </p>
-        </section>
-      </Body>
-      <AuthFooter>
-        <h5 className="footer-intro">Already have a NEAR account?</h5>
-        <Button black>Log in with NEAR</Button>
-      </AuthFooter>
+        <Formik
+          initialValues={{
+            email: '',
+            phone: '',
+          }}
+          validationSchema={
+            activeTab === 'email'
+              ? RegisterWithEmailSchema
+              : RegisterWithPhoneSchema
+          }
+          onSubmit={() => {}}
+        >
+          {({ errors, values, setValues }) => (
+            <Form className="form">
+              {activeTab === 'email' ? (
+                <Input
+                  type="email"
+                  value={values.email}
+                  onChange={(e) =>
+                    setValues({ ...values, email: e.target.value })
+                  }
+                  placeholder="Email Address"
+                />
+              ) : (
+                <Input
+                  type="tel"
+                  value={values.phone}
+                  onChange={(e) =>
+                    setValues({ ...values, phone: e.target.value })
+                  }
+                  placeholder="Ex (337) 378 8383"
+                />
+              )}
+              <Button disabled>Continue</Button>
+              <p className="agreement">
+                by clicking continue you must agree to near labs{' '}
+                <Link href="#terms-and-conditions">
+                  <a>Terms & Conditions</a>
+                </Link>{' '}
+                and{' '}
+                <Link href="#privacy-policy">
+                  <a>Privacy Policy</a>
+                </Link>
+              </p>
+            </Form>
+          )}
+        </Formik>
+        <div className="line" />
+        <LoginWithNear />
+      </AuthBody>
     </AuthLayout>
   );
 }
 
-const AuthFooter = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 0;
-  border-top: solid 1px ${({ theme }) => theme.colors.text[600]};
-  margin-top: 20px;
-
-  .footer-intro {
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.text[200]};
-    font-size: 14px;
-  }
-`;
-
-const Input = styled.input`
-  padding: 11.5px 20px;
-  border-radius: 10px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.text[200]};
-  font-size: 16px;
-  border: solid 1px ${({ theme }) => theme.colors.text[500]};
-
-  &::placeholder {
-    color: var(--grey);
-  }
-`;
-
-const Body = styled.section`
-  --grey: #828282;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  .start {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-  }
-
-  .center {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .end {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    justify-content: center;
-
-    .agreement {
-      font-size: 12px;
-      color: ${({ theme }) => theme.colors.text[300]};
-      text-align: center;
-      line-height: 16.39px;
-
-      a {
-        color: ${({ theme }) => theme.colors.blue[200]};
-      }
-    }
-  }
-`;
-
 const NavPill = styled.button<{ active?: boolean }>`
   background-color: transparent;
-  padding: 6px 12px;
-  border-radius: 10px;
-  color: ${({ theme }) => theme.colors.text[200]};
-  cursor: pointer;
-  font-size: 14px;
   border: solid 1px
-    ${({ theme, active }) => (active ? theme.colors.text[500] : 'transparent')};
+    ${({ active, theme }) => (active ? theme.colors.text[500] : 'transparent')};
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: ${({ theme, active }) =>
+    active ? theme.colors.text[200] : theme.colors.text[300]};
+  border-radius: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
 `;
 
 export default Register;
