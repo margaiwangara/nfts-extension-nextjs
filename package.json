@@ -1,0 +1,37 @@
+{
+  "name": "growth-lab-challenge-client",
+  "version": "0.0.1",
+  "description": "Developing an interface with React.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "next start",
+    "dev": "next dev",
+    "build": "next build",
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/margaiwangara/growth-lab-challenge.git"
+  },
+  "keywords": [
+    "challenge",
+    "react",
+    "redux"
+  ],
+  "author": "Margai Wangara <margaiwangara@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/margaiwangara/growth-lab-challenge/issues"
+  },
+  "homepage": "https://github.com/margaiwangara/growth-lab-challenge#readme",
+  "dependencies": {
+    "next": "^12.0.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.13",
+    "@types/react": "^17.0.38",
+    "typescript": "^4.5.5"
+  }
+}
