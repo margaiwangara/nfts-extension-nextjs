@@ -1,8 +1,7 @@
-import { Button, Input, AuthBody, IntroText } from '@components/ui';
+import { Button, AuthBody, IntroText } from '@components/ui';
 import AuthLayout from '@containers/AuthLayout';
 import styled from 'styled-components';
-import { Formik, Form } from 'formik';
-import Link from 'next/link';
+import VerificationForm from './components/VerificationForm';
 
 function Verification() {
   return (
@@ -14,22 +13,7 @@ function Verification() {
             <span>johndoe@gmail.com</span>
           </IntroText>
         </section>
-        <Formik initialValues={{}} onSubmit={() => {}}>
-          {() => (
-            <Form className="form">
-              <FormHeading>Enter verification code</FormHeading>
-              <FormGroup>
-                <CustomInput type="text" />
-                <CustomInput type="text" />
-                <CustomInput type="text" />
-                <CustomInput type="text" />
-                <CustomInput type="text" />
-                <CustomInput type="text" />
-              </FormGroup>
-              <Button disabled>Continue</Button>
-            </Form>
-          )}
-        </Formik>
+        <VerificationForm />
         <div className="line" />
         <Footer>
           <h4>Didn&apos;t receive your code?</h4>
@@ -40,12 +24,6 @@ function Verification() {
     </AuthLayout>
   );
 }
-
-const FormGroup = styled.section`
-  display: grid;
-  grid-template-columns: repeat(6, 40.1px);
-  gap: 10.82px;
-`;
 
 const Footer = styled.section`
   font-size: 14px;
@@ -60,19 +38,6 @@ const Footer = styled.section`
   h4 {
     font-weight: 500;
   }
-`;
-
-const FormHeading = styled.h4`
-  font-size: 14px;
-  line-height: 19px;
-  color: #808080;
-  font-weight: 500;
-`;
-
-const CustomInput = styled(Input)`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.03);
-  text-align: center;
 `;
 
 export default Verification;
