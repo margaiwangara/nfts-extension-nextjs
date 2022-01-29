@@ -28,9 +28,30 @@ function Register() {
           </p>
         </section>
       </Body>
+      <AuthFooter>
+        <h5 className="footer-intro">Already have a NEAR account?</h5>
+        <Button black>Log in with NEAR</Button>
+      </AuthFooter>
     </AuthLayout>
   );
 }
+
+const AuthFooter = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  border-top: solid 1px ${({ theme }) => theme.colors.text[600]};
+  margin-top: 20px;
+
+  .footer-intro {
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.text[200]};
+    font-size: 14px;
+  }
+`;
 
 const Input = styled.input`
   padding: 11.5px 20px;
