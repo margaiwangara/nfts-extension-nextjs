@@ -23,8 +23,18 @@ function Home() {
         <section className="center"></section>
         <section className="end">
           <section className="toggle-container">
-            <button className="toggle">Collectibles</button>
+            <button className="toggle active">Collectibles</button>
             <button className="toggle">Transactions</button>
+          </section>
+
+          <section className="toggle-view">
+            <section className="toggle-view-box">
+              <section className="start">
+                <span />
+              </section>
+              <section className="center" />
+              <section className="end" />
+            </section>
           </section>
         </section>
       </Body>
@@ -61,19 +71,57 @@ const Body = styled.section`
   .end {
     display: flex;
     flex-direction: column;
+    
 
     .toggle-container {
       display: flex;
+      border-bottom: solid 1px ${({ theme }) => theme.colors.text[600]};
 
       .toggle {
         flex: 1;
-        font-weight: 600;
+        font-weight: 500;
         text-align: center;
-        color: ${({ theme }) => theme.colors.text[100]};
+        color: ${({ theme }) => theme.colors.text[300]};
         font-size: 15px;
         background-color: transparent;
-        padding: 8px 12px;
+        padding: 10px 12px;
         border: none;
+        
+        &.active {
+          color: ${({ theme }) => theme.colors.text[100]};
+          border-bottom: solid 2px ${({ theme }) => theme.colors.text[100]};
+        }
+      }
+    }
+
+    .toggle-view {
+      display: flex;
+      flex-direction: column;
+
+      &-box {
+        display: flex;
+        padding: 10px 0;
+
+        .start {
+          span {
+            height: 60px;
+            width: 60px;
+            background-color: ${({ theme }) => theme.colors.text[600]};
+            border-radius: 10px;
+            display: block;
+          }
+        }
+
+        .center {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .end {
+
+        }
       }
     }
   }
