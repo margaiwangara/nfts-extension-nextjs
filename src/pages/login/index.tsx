@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { Formik, Form } from 'formik';
-import { Label, Button, Input } from '@components/ui';
+import LoginForm from './components/LoginForm';
 
 function Login() {
   return (
@@ -13,40 +12,11 @@ function Login() {
         <p className="description">
           Please enter the password to unlock this wallet
         </p>
-        <Formik initialValues={{}} onSubmit={() => {}}>
-          {({}) => (
-            <CustomForm>
-              <FormGroup>
-                <Label htmlFor="password" style={{ alignSelf: 'start' }}>
-                  Password
-                </Label>
-                <Input type="password" style={{ width: '100%' }} />
-              </FormGroup>
-              <Button disabled style={{ alignSelf: 'center' }}>
-                Unlock
-              </Button>
-            </CustomForm>
-          )}
-        </Formik>
+        <LoginForm />
       </LoginBody>
     </LoginWrapper>
   );
 }
-
-const CustomForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  width: 100%;
-`;
-
-const FormGroup = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-`;
 
 const LoginWrapper = styled.section`
   display: flex;
