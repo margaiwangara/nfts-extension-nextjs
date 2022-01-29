@@ -22,6 +22,8 @@ module.exports = {
     '^@pages/(.*)$': '<rootDir>/src/pages/$1',
     '^@store/(.*)$': '<rootDir>/src/store/$1',
     '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
+    '^@containers/(.*)$': '<rootDir>/src/containers/$1',
+    '^@src/(.*)$': '<rootDir>/src/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   testEnvironment: 'jsdom',
