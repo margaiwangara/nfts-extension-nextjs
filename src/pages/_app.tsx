@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-family: 'Manrope', Arial, Helvetica, sans-serif;
     font-size: 16px;
     width: 100%;
     overflow-x: hidden;

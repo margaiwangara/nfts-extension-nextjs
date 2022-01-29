@@ -1,19 +1,9 @@
-import AuthLayout from '@containers/AuthLayout';
-import styled from 'styled-components';
-import { Button, Input, AuthBody } from '@components/ui';
-import Link from 'next/link';
-import { useState } from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
 import LoginWithNear from '@components/shared/LoginWithNear';
-
-const RegisterWithEmailSchema = Yup.object().shape({
-  email: Yup.string().required('Email is required'),
-});
-
-const RegisterWithPhoneSchema = Yup.object().shape({
-  phone: Yup.string().required('Phone number is required'),
-});
+import { AuthBody } from '@components/ui';
+import AuthLayout from '@containers/AuthLayout';
+import { useState } from 'react';
+import styled from 'styled-components';
+import RegisterForm from './components/RegisterForm';
 
 function Register() {
   const [activeTab, setActiveTab] = useState<'email' | 'phone'>('email');
@@ -34,53 +24,7 @@ function Register() {
             Phone
           </NavPill>
         </section>
-        <Formik
-          initialValues={{
-            email: '',
-            phone: '',
-          }}
-          validationSchema={
-            activeTab === 'email'
-              ? RegisterWithEmailSchema
-              : RegisterWithPhoneSchema
-          }
-          onSubmit={() => {}}
-        >
-          {({ errors, values, setValues }) => (
-            <Form className="form">
-              {activeTab === 'email' ? (
-                <Input
-                  type="email"
-                  value={values.email}
-                  onChange={(e) =>
-                    setValues({ ...values, email: e.target.value })
-                  }
-                  placeholder="Email Address"
-                />
-              ) : (
-                <Input
-                  type="tel"
-                  value={values.phone}
-                  onChange={(e) =>
-                    setValues({ ...values, phone: e.target.value })
-                  }
-                  placeholder="Ex (337) 378 8383"
-                />
-              )}
-              <Button disabled>Continue</Button>
-              <p className="agreement">
-                by clicking continue you must agree to near labs{' '}
-                <Link href="#terms-and-conditions">
-                  <a>Terms & Conditions</a>
-                </Link>{' '}
-                and{' '}
-                <Link href="#privacy-policy">
-                  <a>Privacy Policy</a>
-                </Link>
-              </p>
-            </Form>
-          )}
-        </Formik>
+        <RegisterForm activeTab={activeTab} />
         <div className="line" />
         <LoginWithNear />
       </AuthBody>
