@@ -6,12 +6,10 @@ import theme from '@src/theme';
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 
@@ -28,11 +26,17 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     width: 100%;
     overflow-x: hidden;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+      display: none;
+    }
   }
 
   a {
     text-decoration: none;
   }
+
+
 `;
 
 export default wrapper.withRedux(App);
