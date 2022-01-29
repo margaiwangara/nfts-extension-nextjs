@@ -25,6 +25,7 @@ declare module 'styled-components' {
         800: string;
       };
       danger: string;
+      white: string;
     };
     breakpoints: {
       sm: string;
