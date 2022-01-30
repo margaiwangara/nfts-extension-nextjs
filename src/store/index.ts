@@ -13,3 +13,4 @@ function configureStore() {
 }
 
 export const wrapper = createWrapper(configureStore);
+export { configureStore };

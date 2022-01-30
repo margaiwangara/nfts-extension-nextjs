@@ -20,7 +20,6 @@ type Props = {
 };
 
 function RegisterForm({ activeTab }: Props) {
-  const router = useRouter();
   const { register } = useAuth();
   return (
     <Formik
