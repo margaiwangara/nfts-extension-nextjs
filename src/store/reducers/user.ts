@@ -12,6 +12,7 @@ const INITIAL_STATE: IUser = {
   phone: '',
   accountId: '',
   verificationCode: null,
+  password: '',
 };
 
 function userReducer(state = INITIAL_STATE, action: IAction): IUser {
