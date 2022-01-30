@@ -11,17 +11,11 @@ describe('TopBar', () => {
       </ThemeProvider>,
     );
 
-    const title = screen.getByText((content, node) => {
-      const hasText = (node) => node.textContent === 'HomePage';
-      const nodeHasText = hasText(node);
-      const childrenDontHaveText = Array.from(node.children).every(
-        (child) => !hasText(child),
-      );
+    const title1 = screen.getByText('Home');
+    const title2 = screen.getByText('Page');
 
-      return nodeHasText && childrenDontHaveText;
-    });
-
-    expect(title).toBeInTheDocument();
+    expect(title1).toBeInTheDocument();
+    expect(title2).toBeInTheDocument();
   });
 
   it('renders title if title prop is provided', () => {
