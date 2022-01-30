@@ -64,10 +64,12 @@ export function useAuth() {
       return;
     }
 
-    dispatch({
-      ...user,
-      password,
-    });
+    dispatch(
+      setCurrentUser({
+        ...user,
+        password,
+      }),
+    );
 
     router.push('/');
   };

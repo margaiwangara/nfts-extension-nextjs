@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
+import { useAuth } from '@hooks/useAuth';
 
 const CreateAccountSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -10,6 +11,8 @@ const CreateAccountSchema = Yup.object().shape({
 });
 
 function CreateAccountForm() {
+  const { createAccount } = useAuth();
+
   return (
     <Formik
       initialValues={{
@@ -17,9 +20,12 @@ function CreateAccountForm() {
         accountId: '',
       }}
       validationSchema={CreateAccountSchema}
-      onSubmit={() => {}}
+      onSubmit={(values) => {
+        console.log('clicked');
+        createAccount(values.name, values.accountId);
+      }}
     >
-      {({ errors, setValues, values }) => (
+      {({ errors, setValues, values, handleSubmit }) => (
         <Form className="form">
           <FormGroup>
             <Label htmlFor="fullName">Full Name</Label>
@@ -51,8 +57,10 @@ function CreateAccountForm() {
           </FormGroup>
           <Button
             style={{ alignSelf: 'center' }}
-            disabled={!!(values?.name || !values?.accountId)}
+            disabled={!values?.name || !values?.accountId}
             accent={!!(values?.name && values?.accountId)}
+            onClick={() => handleSubmit()}
+            type="button"
           >
             Continue
           </Button>

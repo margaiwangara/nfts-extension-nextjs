@@ -67,6 +67,7 @@ function RegisterForm({ activeTab }: Props) {
               !!(activeTab === 'phone' && values.phone)
             }
             onClick={() => handleSubmit()}
+            type="button"
           >
             Continue
           </Button>

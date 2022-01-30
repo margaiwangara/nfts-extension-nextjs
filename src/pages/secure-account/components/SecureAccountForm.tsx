@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import Link from 'next/link';
 import * as Yup from 'yup';
+import { useAuth } from '@hooks/useAuth';
 
 const SecureAccountSchema = Yup.object().shape({
   password: Yup.string()
@@ -15,6 +16,8 @@ const SecureAccountSchema = Yup.object().shape({
 });
 
 function SecureAccountForm() {
+  const { secureAccount } = useAuth();
+
   return (
     <Formik
       initialValues={{
@@ -22,9 +25,11 @@ function SecureAccountForm() {
         confirm_password: '',
       }}
       validationSchema={SecureAccountSchema}
-      onSubmit={() => {}}
+      onSubmit={(values) => {
+        secureAccount(values.password);
+      }}
     >
-      {({ errors, values, setValues }) => (
+      {({ errors, values, setValues, handleSubmit }) => (
         <Form className="form">
           <FormGroup>
             <Label htmlFor="password">Password</Label>
@@ -53,8 +58,10 @@ function SecureAccountForm() {
 
           <Button
             style={{ alignSelf: 'center' }}
-            disabled={!!(!values?.password || !values?.confirm_password)}
+            disabled={!values?.password || !values?.confirm_password}
             accent={!!(values?.password && values?.confirm_password)}
+            type="button"
+            onClick={() => handleSubmit()}
           >
             Continue
           </Button>

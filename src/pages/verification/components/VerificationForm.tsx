@@ -78,6 +78,7 @@ function VerificationForm() {
                 )
               }
               onClick={() => handleSubmit()}
+              type="button"
             >
               Continue
             </Button>

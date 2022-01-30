@@ -36,6 +36,7 @@ function LoginForm() {
             style={{ alignSelf: 'center' }}
             disabled={!values?.password}
             accent={!!values?.password}
+            type="button"
           >
             Unlock
           </Button>
