@@ -55,6 +55,7 @@ function VerificationForm() {
                     setValues({ ...values, [key]: e.target.value })
                   }
                   maxLength={1}
+                  placeholder={`${index + 1}`}
                 />
               ))}
             </FormGroup>
