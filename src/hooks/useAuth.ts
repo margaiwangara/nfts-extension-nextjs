@@ -1,10 +1,10 @@
-import { IUser } from '@store/types';
+import { IState } from '@store/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser } from '@store/actions/user';
 import { useRouter } from 'next/router';
 
 export function useAuth() {
-  const user = useSelector((state: IUser) => state.user);
+  const user = useSelector((state: IState) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -13,12 +13,10 @@ export function useAuth() {
 
     dispatch(
       setCurrentUser({
-        user: { ...user, [key]: value, verificationCode: randomCode },
+        ...user,
+        [key]: value,
+        verificationCode: randomCode,
       }),
-    );
-
-    alert(
-      `Your verification code is: ${randomCode}. Please copy for reuse in the next step`,
     );
 
     router.push('/verification');
@@ -37,7 +35,8 @@ export function useAuth() {
 
     dispatch(
       setCurrentUser({
-        user: { ...user, verificationCode: null },
+        ...user,
+        verificationCode: null,
       }),
     );
 
@@ -51,7 +50,9 @@ export function useAuth() {
 
     dispatch(
       setCurrentUser({
-        user: { ...user, name, accountId },
+        ...user,
+        name,
+        accountId,
       }),
     );
 
@@ -62,6 +63,11 @@ export function useAuth() {
     if (!password) {
       return;
     }
+
+    dispatch({
+      ...user,
+      password,
+    });
 
     router.push('/');
   };

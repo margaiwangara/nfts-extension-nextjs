@@ -7,25 +7,19 @@ interface IAction {
 }
 
 const INITIAL_STATE: IUser = {
-  user: {
-    name: '',
-    email: '',
-    phone: '',
-    accountId: '',
-    verificationCode: null,
-  },
-  isAuthenticated: false,
+  name: '',
+  email: '',
+  phone: '',
+  accountId: '',
+  verificationCode: null,
 };
 
 function userReducer(state = INITIAL_STATE, action: IAction): IUser {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
-        user: {
-          ...state?.user,
-          ...action?.payload?.user,
-        },
-        isAuthenticated: !!action?.payload?.isAuthenticated,
+        ...state,
+        ...action.payload,
       };
     default:
       return state;

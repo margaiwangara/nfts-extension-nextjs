@@ -3,6 +3,8 @@ import { Input, Button } from '@components/ui';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
+import { useAuth } from '@hooks/useAuth';
+
 const RegisterWithEmailSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
 });
@@ -19,6 +21,7 @@ type Props = {
 
 function RegisterForm({ activeTab }: Props) {
   const router = useRouter();
+  const { register } = useAuth();
   return (
     <Formik
       initialValues={{
@@ -30,8 +33,8 @@ function RegisterForm({ activeTab }: Props) {
           ? RegisterWithEmailSchema
           : RegisterWithPhoneSchema
       }
-      onSubmit={() => {
-        router.push('/verification');
+      onSubmit={(values) => {
+        register(activeTab, values[activeTab]);
       }}
     >
       {({ errors, values, setValues, handleSubmit }) => (

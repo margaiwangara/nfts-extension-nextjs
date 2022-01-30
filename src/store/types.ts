@@ -1,12 +1,10 @@
 export interface IUser {
-  user: {
-    name: string;
-    email: string;
-    phone: string;
-    accountId: string;
-    verificationCode: number;
-  };
-  isAuthenticated?: boolean;
+  name: string;
+  email: string;
+  phone: string;
+  accountId: string;
+  verificationCode: number;
+  password: string;
 }
 
 export interface IState {
