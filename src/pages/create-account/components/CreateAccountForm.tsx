@@ -21,7 +21,6 @@ function CreateAccountForm() {
       }}
       validationSchema={CreateAccountSchema}
       onSubmit={(values) => {
-        console.log('clicked');
         createAccount(values.name, values.accountId);
       }}
     >
