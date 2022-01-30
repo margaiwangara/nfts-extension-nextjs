@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Input, Button } from '@components/ui';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { useAuth } from '@hooks/useAuth';
 
 const VerificationSchema = Yup.object().shape({
   num1: Yup.number().required('Code 1 is required'),
@@ -14,7 +15,7 @@ const VerificationSchema = Yup.object().shape({
 });
 
 function VerificationForm() {
-  const [code, setCode] = useState('');
+  const { verify } = useAuth();
 
   return (
     <Formik
@@ -26,10 +27,19 @@ function VerificationForm() {
         num5: '',
         num6: '',
       }}
-      onSubmit={() => {}}
+      onSubmit={(values) => {
+        let code = '';
+        Object.keys(values).forEach((item) => (code += values?.[item]));
+
+        if (code?.length !== 6) {
+          return;
+        }
+
+        verify(code);
+      }}
       validationSchema={VerificationSchema}
     >
-      {({ values, errors, setValues }) => {
+      {({ values, errors, setValues, handleSubmit }) => {
         return (
           <Form className="form">
             <FormHeading>Enter verification code</FormHeading>
@@ -48,7 +58,29 @@ function VerificationForm() {
                 />
               ))}
             </FormGroup>
-            <Button disabled>Continue</Button>
+            <Button
+              disabled={
+                !values?.num1 ||
+                !values?.num2 ||
+                !values?.num3 ||
+                !values?.num4 ||
+                !values?.num5 ||
+                !values?.num6
+              }
+              accent={
+                !!(
+                  values?.num1 &&
+                  values?.num2 &&
+                  values?.num3 &&
+                  values?.num4 &&
+                  values?.num5 &&
+                  values?.num6
+                )
+              }
+              onClick={() => handleSubmit()}
+            >
+              Continue
+            </Button>
           </Form>
         );
       }}

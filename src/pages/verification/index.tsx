@@ -2,17 +2,23 @@ import { Button, AuthBody, IntroText } from '@components/ui';
 import AuthLayout from '@containers/AuthLayout';
 import styled from 'styled-components';
 import VerificationForm from './components/VerificationForm';
+import { useSelector } from 'react-redux';
+import { IState } from '@store/types';
 
 function Verification() {
+  const user = useSelector((state: IState) => state.user);
+
   return (
     <AuthLayout title="Verification">
       <AuthBody>
         <section className="start">
           <IntroText>
-            We have sent a 6-digit verification code to the email address{' '}
-            <span>johndoe@gmail.com</span>
+            We have sent a 6-digit verification code to the{' '}
+            {user?.email ? 'email address' : 'phone number'}{' '}
+            <span>{user?.email || user?.phone}</span>
           </IntroText>
         </section>
+        <h4 style={{ textAlign: 'center' }}>Code: {user?.verificationCode}</h4>
         <VerificationForm />
         <div className="line" />
         <Footer>
