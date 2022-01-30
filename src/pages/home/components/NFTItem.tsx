@@ -1,13 +1,18 @@
 import styled from 'styled-components';
+import { INFT } from '@store/types';
 
-function NFTItem() {
+type Props = {
+  item: INFT;
+};
+
+function NFTItem({ item }: Props) {
   return (
     <ItemWrapper>
       <section className="image" />
       <section className="details">
-        <h4 className="title">Digital Ninja</h4>
+        <h4 className="title">{item?.name}</h4>
         <p className="description">
-          by <span>johndoe.near</span>
+          by <span>{item?.user}</span>
         </p>
       </section>
     </ItemWrapper>

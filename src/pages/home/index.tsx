@@ -2,7 +2,21 @@ import styled from 'styled-components';
 import HomeBar from './components/HomeBar';
 import { Button } from '@components/ui';
 import NFTContainer from './components/NFTContainer';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { IState } from '@store/types';
+import { useRouter } from 'next/router';
+
 function Home() {
+  const user = useSelector((state: IState) => state.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user?.accountId) {
+      router.replace('/register');
+    }
+  }, [user, router]);
+
   return (
     <HomeWrapper>
       <HomeBar />

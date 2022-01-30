@@ -1,15 +1,36 @@
 import styled from 'styled-components';
 import NFTItem from './NFTItem';
+import { useSelector } from 'react-redux';
+import { IState } from '@store/types';
+import { useState } from 'react';
 
 function NFTContainer() {
+  const [active, setActive] = useState<'collectible' | 'transaction'>(
+    'collectible',
+  );
+  const nfts = useSelector((state: IState) => state.nfts);
+
   return (
     <NFTContainerWrapper>
       <section className="top">
-        <ToggleButton active>Collectibles</ToggleButton>
-        <ToggleButton>Transactions</ToggleButton>
+        <ToggleButton
+          active={active === 'collectible'}
+          onClick={() => setActive('collectible')}
+        >
+          Collectibles
+        </ToggleButton>
+        <ToggleButton
+          active={active === 'transaction'}
+          onClick={() => setActive('transaction')}
+        >
+          Transactions
+        </ToggleButton>
       </section>
       <section className="bottom">
-        <NFTItem />
+        {nfts?.map(
+          (item, index) =>
+            item.type === active && <NFTItem key={index} item={item} />,
+        )}
       </section>
     </NFTContainerWrapper>
   );
